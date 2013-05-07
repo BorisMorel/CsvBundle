@@ -4,17 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="imag_csv.example.class">IMAG\CsvBundle\Example</parameter>
+        <parameter key="imag_csv.manager.csv.class">IMAG\CsvBundle\Manager\CsvManager</parameter>
+
+        <parameter key="imag_csv.provider.csv.class">IMAG\CsvBundle\Provider\CsvProvider</parameter>
     </parameters>
 
     <services>
-        <service id="imag_csv.example" class="%imag_csv.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="imag_csv.provider.csv" class="%imag_csv.provider.csv.class%" />
+
+        <service id="imag_csv.manager.csv" class="%imag_csv.manager.csv.class%">
+            <argument type="service" id="imag_csv.provider.csv" />
         </service>
     </services>
-    -->
+
 </container>
