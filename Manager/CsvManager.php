@@ -74,7 +74,7 @@ class CsvManager
     public function write()
     {
         $this->provider
-            ->setData($this->rowscollection)
+            ->setData($this->rowsCollection)
             ->compile();
     }
 }
