@@ -2,7 +2,7 @@
 
 namespace IMAG\CsvBundle\Model;
 
-class RowsCollection extends \Iterator
+class RowsCollection implements \Iterator, \ArrayAccess
 {
     private $rows;
 
@@ -11,7 +11,7 @@ class RowsCollection extends \Iterator
     public function __construct(array $array=array())
     {
         foreach ($array as $key => $item) {
-            $this->addIndexexRow[$key, $item];
+            $this->addIndexexRow[$key] = $item;
         }
     }
 
@@ -76,6 +76,38 @@ class RowsCollection extends \Iterator
      */
     public function valid()
     {
-        return isset($this->current());
+        return isset($this->rows[$this->iteratorIndex]);
+    }
+
+    /**
+     * inherit
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->rows[$offset] = $value;
+    }
+
+    /**
+     * inherit
+     */
+    public function offsetGet($offset)
+    {
+        return $this->rows[$offset];
+    }
+
+    /**
+     * inherit
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->rows[$offset]);
+    }
+
+    /**
+     * inherit
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->rows[$offset]);
     }
 }
