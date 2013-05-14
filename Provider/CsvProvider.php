@@ -76,17 +76,21 @@ class CsvProvider
             throw new \InvalidArgumentException(FileError::NOT_PROVIDED);
         }
 
-        $handle = @fopen($this->filename, 'x');
+        $handle = @fopen($this->filename, 'w');
 
         if (false === $handle) {
             throw new \InvalidArgumentException(FileError::EXISTS_OR_NOT_READABLE);
         }
 
-        $int = fputcsv($handle, $this->rowsCollection, $this->delimiter, $this->enclosure);
+        foreach ($this->rowsCollection as $row) {
+            $int = fputcsv($handle, iterator_to_array($row), $this->delimiter, $this->enclosure);            
 
-        if (false === $int) {
-            throw new \RuntimeException("Csv can't be created");
+            if (false === $int) {
+                throw new \RuntimeException("Csv can't be created");
+            }
         }
+
+        fclose($handle);
 
         return true;
     }
