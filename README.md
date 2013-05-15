@@ -55,8 +55,10 @@ $manager
 
 // Create a row on Csv
 $row = $manager->createRow();
-$row->addField('1')
-$row->addField('2');
+$row
+    ->addField('1')
+    ->addField('2')
+    ;
 $manager->addRow($row);
 
 // Write Csv
