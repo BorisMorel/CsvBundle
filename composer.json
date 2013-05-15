@@ -1,0 +1,27 @@
+{
+    "name": "imag/csv-bundle",
+    "description": "Create and manage your CSV",
+    "homepage": "http://github.com/BorisMorel/CsvBundle",
+    "license": "CeCILL",
+    "authors": [
+        {
+            "name": "Boris Morel",
+            "email": "boris.morel@imag.fr",
+            "role": "Maintainer",
+            "homepage" : "https://github.com/BorisMorel"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": ">2.0",
+    },
+    "source": {
+        "url": "https://github.com/BorisMorel/CsvBundle.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "autoload": {
+        "psr-0": { "IMAG\\CsvBundle": "" }
+    },
+    "target-dir": "IMAG/CsvBundle"
+}
