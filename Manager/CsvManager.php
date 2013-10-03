@@ -28,6 +28,13 @@ class CsvManager
         return $this;
     }
 
+    public function addHeaderRow(Row $row)
+    {
+        $this->rowsCollection->addHeaderRow($row);
+
+        return $this;
+    }
+    
     public function addIndexedRow($index, Row $row)
     {
         $this->rowsCollection->addIndexedRow($index, $row);
