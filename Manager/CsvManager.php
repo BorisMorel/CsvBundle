@@ -84,4 +84,12 @@ class CsvManager
             ->setData($this->rowsCollection)
             ->compile();
     }
+
+    public function getRawData()
+    {
+        return $this->provider
+            ->setData($this->rowsCollection)
+            ->getData()
+            ;
+    }
 }
