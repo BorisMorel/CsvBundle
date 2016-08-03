@@ -46,10 +46,10 @@ class CsvProvider
     public function setData(RowsCollection $rowsCollection)
     {
         $this->rowsCollection = $rowsCollection;
-        
+
         return $this;
     }
-    
+
     public function getFilename()
     {
         return $this->filename;
@@ -70,6 +70,30 @@ class CsvProvider
         return $this->rowsCollection;
     }
 
+    public function getAsString()
+    {
+        $out = '';
+        $buffer = @fopen('php://temp/csv', 'r+');
+
+        foreach ($this->rowsCollection as $row) {
+            $int = fputcsv($buffer, iterator_to_array($row), $this->delimiter, $this->enclosure);
+
+            if (false === $int) {
+                throw new \RuntimeException("Csv can't be created");
+            }
+        }
+
+        rewind($buffer);
+
+        while(false !== $csv = fgets($buffer)) {
+            $out .= $csv;
+        }
+
+        fclose($buffer);
+
+        return $out;
+    }
+
     public function compile()
     {
         if (null === $this->filename) {
@@ -83,7 +107,7 @@ class CsvProvider
         }
 
         foreach ($this->rowsCollection as $row) {
-            $int = fputcsv($handle, iterator_to_array($row), $this->delimiter, $this->enclosure);            
+            $int = fputcsv($handle, iterator_to_array($row), $this->delimiter, $this->enclosure);
 
             if (false === $int) {
                 throw new \RuntimeException("Csv can't be created");

@@ -78,6 +78,13 @@ class CsvManager
             ->compile();
     }
 
+    public function getAsString()
+    {
+        return $this->provider
+            ->setData($this->rowsCollection)
+            ->getAsString();
+    }
+
     public function getRawData()
     {
         return $this->provider
