@@ -13,11 +13,20 @@ class RowsCollection implements \Iterator, \ArrayAccess
         foreach ($array as $key => $item) {
             $this->addIndexexRow[$key] = $item;
         }
+
+        $this->rows = array();
     }
 
     public function addRow(Row $row)
     {
         $this->rows[] = $row;
+
+        return $this;
+    }
+
+    public function addHeaderRow(Row $row)
+    {
+        array_unshift($this->rows, $row);
 
         return $this;
     }
@@ -39,6 +48,11 @@ class RowsCollection implements \Iterator, \ArrayAccess
         return $this->rows[$index];
     }
     
+    public function getHeaderRow()
+    {
+        return $this->rows[0];
+    }
+
     /**
      * inherit
      */
